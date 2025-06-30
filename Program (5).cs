@@ -1,19 +1,24 @@
-﻿using System;
+using System;
 
 class Program
 {
- static void Main()
+    static void Main()
     {
-        int sum = 0;
-        int product = 1;
+        double xStart = 1;
+        double xEnd = 7;
+        double dx = 0.25;
+        double[] aValues = { 0.5, 0.75, 1.0, 1.25 };
 
-        for (int i = 1; i <= 10; i++)
+        Console.WriteLine("Значення функції y(x) = √(x + a * e^(-x²)) * (a * x²)");
+
+        foreach (double a in aValues)
         {
-            sum += i;
-            product *= i;
+            Console.WriteLine($"\na = {a}");
+            for (double x = xStart; x <= xEnd + 0.0001; x += dx)
+            {
+                double y = Math.Sqrt(x + a * Math.Exp(-x * x)) * (a * x * x);
+                Console.WriteLine($"x = {x:F2}, y = {y:F5}");
+            }
         }
-
-        Console.WriteLine("Сума: " + sum);
-        Console.WriteLine("Добуток: " + product);
     }
 }
