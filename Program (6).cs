@@ -1,23 +1,25 @@
-﻿using System;
+using System;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine("Введіть ціле число a:");
-        int a = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Введіть ціле число b:");
-        int b = Convert.ToInt32(Console.ReadLine());
+        double[] controlX = { 0.25, -1.0 / 3, 0.5 };
+        Console.WriteLine("Обчислення ряду та порівняння з y = ln(1 + 2x)");
 
-        int sum = 0, count = 0;
+        foreach (double x in controlX)
+        { double s = 0;
+            int n = 1;
+            double term;
+            do
+            { term = (Math.Pow(2, n) * Math.Pow(x, n)) / n;
+                s += term;
+                n++;
+            } while (Math.Abs(term) >= 1e-6);
 
-        for (int i = a; i <= b; i++)
-        {
-            sum += i;
-            count++;
+            double y = Math.Log(1 + 2 * x);
+            Console.WriteLine($"\nx = {x:F3}");
+            Console.WriteLine($"Ряд S(x) = {s:F6}");
+            Console.WriteLine($"y(x) = ln(1 + 2x) = {y:F6}");
         }
-
-        Console.WriteLine("Сума: " + sum);
-        Console.WriteLine("Кількість: " + count);
-    }
-}
+    } }
